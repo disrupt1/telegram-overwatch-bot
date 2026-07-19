@@ -2,7 +2,7 @@
 
 A lightweight Telegram bot that allows you to remotely monitor and control your own Windows computer from anywhere.
 
-This project started as a way to remotely check on my PC while away, but has since grown into a full-featured remote administration tool with live shell access, system monitoring, screenshots, process management, and more.
+This project started as a way to remotely check on my PC while away, but has since grown into a fully fletched remote administration tool with live shell access, system monitoring, screenshots and more to come.
 
 > ⚠️ This project is intended for **personal use on machines you own or are explicitly authorized to administer.**
 
