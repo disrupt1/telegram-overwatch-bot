@@ -1,16 +1,18 @@
 import logging
 import os
+import subprocess
+
 from dotenv import load_dotenv
 from telegram import Update
 from telegram.ext import ContextTypes, Application, CommandHandler, CallbackQueryHandler
 from telegram.request import HTTPXRequest
 from commands.ping import ping
 from commands.shellexecution import shell
-from commands.status import status, status_callback
+from commands.status import status, get_ram, get_disk, get_all, get_cpu, inlinebuttons
 from commands.screenshot import screenshot, watch, stopwatch
-from commands.powermanagement import shutdown, shutdown_callback
+from commands.powermanagement import shutdown
 
-load_dotenv()
+load_dotenv(dotenv_path="C:\\Users\\disrupt\\Documents\\python shi\\absolute telegram bot\\secrets.env")
 token = os.getenv("TOKEN")
 
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO)
@@ -26,23 +28,41 @@ requests = HTTPXRequest(
     )
 
 application = Application.builder().token(token).request(requests).build()
-logger.info(f"Running bot with {len(application.handlers)} handlers")
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("wagwan me bredda")
 
+async def callback_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    query = update.callback_query
+    await query.answer()
+
+    if query.data == "get_cpu":
+        await query.edit_message_text(text=get_cpu(), reply_markup=inlinebuttons())
+    elif query.data == "get_ram":
+        await query.edit_message_text(text=get_ram(), reply_markup=inlinebuttons())
+    elif query.data == "get_disk":
+        await query.edit_message_text(text=get_disk(), reply_markup=inlinebuttons())
+    elif query.data == "get_all":
+        await query.edit_message_text(text=get_all(), reply_markup=inlinebuttons())
+
+    if query.data == "confirm":
+        await query.edit_message_text("The computer will shutdown momentarily...")
+        subprocess.run(
+            "shutdown /s /f"
+        )
+    elif query.data == "cancel":
+        await query.edit_message_text("Aborted operation.")
+
 def main():
+    application.add_handler(CallbackQueryHandler(callback_handler))
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CommandHandler("status", status))
-    application.add_handler(CallbackQueryHandler(status_callback))
-    application.add_handler(CallbackQueryHandler(shutdown_callback))
     application.add_handler(CommandHandler("ping", ping))
     application.add_handler(CommandHandler("shell", shell))
     application.add_handler(CommandHandler("screenshot", screenshot))
     application.add_handler(CommandHandler("watch", watch))
     application.add_handler(CommandHandler("stopwatch", stopwatch))
     application.add_handler(CommandHandler("shutdown", shutdown))
-
 
     application.run_polling(allowed_updates=Update.ALL_TYPES)
 

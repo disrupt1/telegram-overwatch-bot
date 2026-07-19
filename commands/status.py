@@ -41,20 +41,6 @@ def get_disk() -> str:
 def get_all() -> str:
     return "\n\n".join([get_cpu(), get_ram(), get_disk()])
 
-
 async def status(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = get_all()
     await update.message.reply_text(text, reply_markup=inlinebuttons(), parse_mode="Markdown")
-
-async def status_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    query = update.callback_query
-    await query.answer()
-
-    if query.data == "get_cpu":
-        await query.edit_message_text(text=get_cpu(), reply_markup=inlinebuttons())
-    elif query.data == "get_ram":
-        await query.edit_message_text(text=get_ram(), reply_markup=inlinebuttons())
-    elif query.data == "get_disk":
-        await query.edit_message_text(text=get_disk(), reply_markup=inlinebuttons())
-    elif query.data == "get_all":
-        await query.edit_message_text(text=get_all(), reply_markup=inlinebuttons())
