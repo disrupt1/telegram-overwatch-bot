@@ -1,5 +1,6 @@
 import logging
 import os
+import ctypes
 import subprocess
 from dotenv import load_dotenv
 from telegram import Update
@@ -9,7 +10,7 @@ from commands.ping import ping
 from commands.shellexecution import shell
 from commands.status import status, get_ram, get_disk, get_all, get_cpu, inlinebuttons
 from commands.screenshot import screenshot, watch, stopwatch
-from commands.powermanagement import shutdown
+from commands.powermanagement import lock, restart, shutdown
 
 load_dotenv(dotenv_path="C:\\Users\\disrupt\\Documents\\python shi\\absolute telegram bot\\secrets.env")
 token = os.getenv("TOKEN")
@@ -44,12 +45,24 @@ async def callback_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif query.data == "get_all":
         await query.edit_message_text(text=get_all(), reply_markup=inlinebuttons())
 
-    if query.data == "confirm":
+    if query.data == "confirm_shut":
         await query.edit_message_text("The computer will shutdown momentarily...")
         subprocess.run(
             "shutdown /s /f"
         )
-    elif query.data == "cancel":
+    elif query.data == "cancel_shut":
+        await query.edit_message_text("Aborted operation.")
+    if query.data == "confirm_restart":
+            await query.edit_message_text("The computer will reboot momentarily...")
+            subprocess.run(
+                "shutdown /r /f"
+            )
+    elif query.data == "cancel_restart":
+        await query.edit_message_text("Aborted operation.")
+    if query.data == "confirm_lock":
+            await query.edit_message_text("The computer will lock down momentarily...")
+            ctypes.windll.user32.LockWorkStation()
+    elif query.data == "cancel_lock":
         await query.edit_message_text("Aborted operation.")
 
 def main():
@@ -62,6 +75,8 @@ def main():
     application.add_handler(CommandHandler("watch", watch))
     application.add_handler(CommandHandler("stopwatch", stopwatch))
     application.add_handler(CommandHandler("shutdown", shutdown))
+    application.add_handler(CommandHandler("restart", restart))
+    application.add_handler(CommandHandler("lock", lock))
 
     application.run_polling(allowed_updates=Update.ALL_TYPES)
 
