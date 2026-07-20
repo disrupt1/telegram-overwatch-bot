@@ -137,9 +137,3 @@ some recommendations:
 - [ ] Notification system
 - [ ] Service manager
 - [ ] Clipboard support
-
----
-
-## License
-
-MIT License
