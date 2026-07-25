@@ -12,7 +12,7 @@ from commands.status import status, get_ram, get_disk, get_all, get_cpu, inlineb
 from commands.screenshot import screenshot, watch, stopwatch
 from commands.powermanagement import lock, restart, shutdown
 
-load_dotenv(dotenv_path="C:\\Users\\disrupt\\Documents\\python shi\\absolute telegram bot\\secrets.env")
+load_dotenv()
 token = os.getenv("TOKEN")
 api_base = os.getenv("BOT_API_BASE")
 
