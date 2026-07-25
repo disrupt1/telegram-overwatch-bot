@@ -114,7 +114,8 @@ The bot runs locally on the target computer and communicates through the Telegra
 
 ### How to use properly:
  
-Go to @BotFather on telegram and create a bot, copy the token (if you want you can also set bot commands). put the token in the secrets.env file in the TOKEN variable. also get your numerical telegram id (get your id with @userinfobot) and put it in the OWNER_ID variable. its a list so you can whitelist multiple users to use the bot.
+Go to @BotFather on telegram and create a bot, copy the token (if you want you can also set bot commands). put the token in the secrets.env file in the TOKEN variable. also get your numerical telegram id (with @userinfobot) and put it in the OWNER_ID variable in ```secrets.env```. its a list so you can whitelist multiple users to use the bot. 
+
 ---
 
 ## Security
