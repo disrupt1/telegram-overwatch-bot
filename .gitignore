@@ -1,2 +1,6 @@
 .idea/
 .vscode/
+ayo.py
+secrets.env
+/commands/__pycache__/
+/commands/__pycache__/*

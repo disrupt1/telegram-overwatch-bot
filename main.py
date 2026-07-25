@@ -14,6 +14,7 @@ from commands.powermanagement import lock, restart, shutdown
 
 load_dotenv(dotenv_path="C:\\Users\\disrupt\\Documents\\python shi\\absolute telegram bot\\secrets.env")
 token = os.getenv("TOKEN")
+api_base = os.getenv("BOT_API_BASE")
 
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO)
 
@@ -27,7 +28,12 @@ requests = HTTPXRequest(
         pool_timeout=300
     )
 
-application = Application.builder().token(token).request(requests).build()
+builder = Application.builder().request(requests)
+
+if api_base:
+     builder.base_url(api_base)
+
+application = builder.build()
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("wagwan me bredda")

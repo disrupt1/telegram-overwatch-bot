@@ -22,7 +22,6 @@ async def shell(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 text=True,
                 bufsize=1
             )
-            SHELLSESSION.stdout.readline()
             await update.message.reply_text("A new CMD shell has been started! Please send your command via /shell 'command' ")
             logger.warning(f"{update.effective_user.full_name} Just started a new CMD shell session.")
     elif context.args[0] == "stop":

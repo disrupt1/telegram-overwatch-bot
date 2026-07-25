@@ -15,7 +15,7 @@ async def screenshot(update: Update, context: ContextTypes.DEFAULT_TYPE):
     try:
         readableshit = time.ctime()
         with open("screenshot.png", "rb") as img:
-            await update.message.reply_document(img, caption=readableshit)
+            await update.message.reply_photo(img, caption=readableshit)
             img.close()
     except Exception as e:
         logger.error(e)
