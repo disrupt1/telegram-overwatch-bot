@@ -2,7 +2,7 @@
 
 A lightweight Telegram bot that allows you to remotely monitor and control your own Windows computer from anywhere.
 
-This project started as a way to remotely check on my PC while away, but has since grown into a fully fletched remote administration tool with live shell access, system monitoring, screenshots and more to come.
+This project started as a way to remotely check on my PC while away from home, but has since grown into a fully fletched remote administration tool with live shell access, system monitoring, screenshots and more to come. why? cuz i was bored
 
 > ⚠️ This project is intended for **personal use on machines you own or are explicitly authorized to administer.**
 
@@ -53,13 +53,7 @@ This project started as a way to remotely check on my PC while away, but has sin
 - High GPU temperature
 - Custom alert thresholds
 
-### File Management *(planned)*
-
-- Browse directories
-- Upload files
-- Download files
-- Delete files
-
+  
 ## Example Commands
 
 ```text
@@ -114,22 +108,23 @@ Lock the workstation.
 
 ## How It Works
 
-The bot runs locally on the target computer and communicates through the Telegram Bot API. Since all commands are initiated from Telegram, no ports need to be opened or forwarded.
+The bot runs locally on the target computer and communicates through the Telegram Bot API. Since all commands are initiated from Telegram, no ports need to be opened or forwarded. think of it as kind of a better SSH session but through telegram.
 
-Long-running tasks such as monitoring and screenshot watching are handled asynchronously using `asyncio` and the built-in JobQueue provided by `python-telegram-bot`.
+---
+
+### How to use properly:
+ 
+Go to @BotFather on telegram and create a bot, copy the token (if you want you can also set bot commands). put the token in the ```secrets.env``` file in the ```TOKEN``` variable. also get your numerical telegram id (with @userinfobot) and put it in the ```OWNER_ID``` variable in ```secrets.env```. its a list so you can whitelist multiple users to use the bot. 
 
 ---
 
 ## Security
 
-This bot is designed for personal use.
+This bot is designed for personal use. don't even think about using this as a backdoor RAT on other people's computers. if anyone does, i am not responsible in any shape or form.
 
-Some recommendations:
+some recommendations:
 
-- Never commit your bot token.
-- Store secrets in environment variables.
 - Restrict access to your Telegram user ID.
-- Consider adding a whitelist for authorized users.
 - Review shell commands carefully before executing them.
 
 ---
@@ -141,17 +136,9 @@ Some recommendations:
 - [x] Screenshot watcher
 - [x] Remote shell
 - [x] Persistent shell sessions
-- [ ] Power controls
+- [x] Power controls
 - [ ] Process manager
 - [ ] File explorer
 - [ ] Notification system
 - [ ] Service manager
 - [ ] Clipboard support
-- [ ] Multi-user support
-- [ ] Plugin system
-
----
-
-## License
-
-MIT License
