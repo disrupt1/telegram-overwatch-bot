@@ -106,11 +106,12 @@ Lock the workstation.
 
 ---
 
-## How It Works & how to use
+## How It Works
 
-The bot runs locally on the target computer and communicates through the Telegram Bot API. Since all commands are initiated from Telegram, no ports need to be opened or forwarded.
+The bot runs locally on the target computer and communicates through the Telegram Bot API. Since all commands are initiated from Telegram, no ports need to be opened or forwarded. think of it as kind of a better SSH session but through telegram.
 
- ### How to use properly: go to @BotFather on telegram and create a bot, copy the token (if you want you can also set bot commands). put the token in the secrets.env file in the TOKEN variable. also get your numerical telegram id (get your id with @userinfobot) and put it in the OWNER_ID variable. its a list so you can whitelist multiple users to use the bot
+ ### How to use properly:
+go to @BotFather on telegram and create a bot, copy the token (if you want you can also set bot commands). put the token in the secrets.env file in the TOKEN variable. also get your numerical telegram id (get your id with @userinfobot) and put it in the OWNER_ID variable. its a list so you can whitelist multiple users to use the bot.
 ---
 
 ## Security
