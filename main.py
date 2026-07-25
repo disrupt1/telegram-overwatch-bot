@@ -28,7 +28,7 @@ requests = HTTPXRequest(
         pool_timeout=300
     )
 
-builder = Application.builder().request(requests)
+builder = Application.builder().request(requests).token(token)
 
 if api_base:
      builder.base_url(api_base)
