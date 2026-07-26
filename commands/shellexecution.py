@@ -2,11 +2,13 @@ import subprocess
 import logging
 from telegram import Update
 from telegram.ext import ContextTypes
+from commands.decorator import authorization
 
 logger = logging.getLogger(__name__)
 
 SHELLSESSION = None
 
+@authorization
 async def shell(update: Update, context: ContextTypes.DEFAULT_TYPE):
     global SHELLSESSION
 

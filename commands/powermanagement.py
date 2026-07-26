@@ -1,5 +1,6 @@
 from telegram import Update, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram.ext import ContextTypes
+from commands.decorator import authorization
 
 def button_shutdown() -> InlineKeyboardMarkup:
     buttonss = [
@@ -28,11 +29,14 @@ def button_lock() -> InlineKeyboardMarkup:
     ]
     return InlineKeyboardMarkup(buttonss)
 
+@authorization
 async def shutdown(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("Are you sure you want to shutdown the computer?", reply_markup=button_shutdown())
 
+@authorization
 async def restart(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("Are you sure you want to restart the computer?", reply_markup=button_restart())
 
+@authorization
 async def lock(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("Are you sure you want to lock the computer?", reply_markup=button_lock())
