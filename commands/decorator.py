@@ -13,7 +13,6 @@ whitelist = [
 ]
 
 def authorization(func):
-    """Restricts a command to only run if the user is in the whitelist"""
     @wraps(func)
     async def authorization_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if update.effective_user.id not in whitelist:
