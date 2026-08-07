@@ -29,7 +29,6 @@ async def watchjob(context: ContextTypes.DEFAULT_TYPE):
     mss.mss().shot(output="screenshot.png")
     try:
         current_time = time.ctime()
-        print(current_time)
         new_img = Image.open("screenshot.png")
         new_img.save(
             "screenshot.jpg",
@@ -56,7 +55,7 @@ async def watch(update: Update, context:ContextTypes.DEFAULT_TYPE):
             chatid = update.effective_user.id
 
             dataset = {
-                "chatid": chatid,
+                "chatid": chatid
             }
 
             context.job_queue.run_repeating(
