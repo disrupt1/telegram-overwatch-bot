@@ -1,4 +1,3 @@
-from email import message
 import subprocess
 import logging
 from telegram import Update
@@ -11,11 +10,9 @@ SHELLSESSION = None
 
 @authorization
 async def shell(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    print(len(context.args))
     global SHELLSESSION
 
-    
-    if context.args != 0:
+    if len(context.args) != 0:
         if context.args[0] == "start":
             if SHELLSESSION is not None:
                 await update.message.reply_text("A CMD shell already exists. Please send your command via /shell 'command' ")

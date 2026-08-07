@@ -1,8 +1,11 @@
 import logging
 import os
 import ctypes
+from shutil import move
 import subprocess
-from dotenv import find_dotenv, load_dotenv
+import time
+from dotenv import load_dotenv
+import pyautogui
 from telegram import Update
 from telegram.ext import ContextTypes, Application, CommandHandler, CallbackQueryHandler
 from telegram.request import HTTPXRequest
@@ -71,6 +74,10 @@ async def callback_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif query.data == "cancel_lock":
         await query.edit_message_text("Aborted operation.")
 
+async def movemouse(context: ContextTypes.DEFAULT_TYPE):
+    pyautogui.move(50,50, duration=1)
+    pyautogui.move(-50,-50, duration=1)
+
 def main():
     application.add_handler(CallbackQueryHandler(callback_handler))
     application.add_handler(CommandHandler("start", start))
@@ -84,7 +91,12 @@ def main():
     application.add_handler(CommandHandler("restart", restart))
     application.add_handler(CommandHandler("lock", lock))
 
-    application.run_polling(allowed_updates=Update.ALL_TYPES)
+    keepawake = input("Do you want the program to move the mouse every 30 seconds to keep the computer awake (yes/no)? ")
+    if keepawake.lower() == "yes":
+        application.job_queue.run_repeating(movemouse, interval=30, first=0, name="keepawake")
+        application.run_polling(allowed_updates=Update.ALL_TYPES)
+    else:
+        application.run_polling(allowed_updates=Update.ALL_TYPES)
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
