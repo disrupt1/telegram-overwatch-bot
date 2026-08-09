@@ -1,17 +1,16 @@
+from abc import update_abstractmethods
 import logging
 import os
 import ctypes
-from shutil import move
 import subprocess
-import time
 from dotenv import load_dotenv
 import pyautogui
 from telegram import Update
-from telegram.ext import ContextTypes, Application, CommandHandler, CallbackQueryHandler
+from telegram.ext import ContextTypes, Application, CommandHandler, CallbackQueryHandler, InlineQueryHandler
 from telegram.request import HTTPXRequest
 from commands.ping import ping
 from commands.shellexecution import shell
-from commands.status import status, get_ram, get_disk, get_all, get_cpu, inlinebuttons
+from commands.status import status, get_ram, get_disk, get_all, get_cpu, inlinebuttons, status_inline
 from commands.screenshot import screenshot, watch, stopwatch
 from commands.powermanagement import lock, restart, shutdown
 
@@ -80,6 +79,7 @@ async def movemouse(context: ContextTypes.DEFAULT_TYPE):
 
 def main():
     application.add_handler(CallbackQueryHandler(callback_handler))
+    application.add_handler(InlineQueryHandler(status_inline))
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CommandHandler("status", status))
     application.add_handler(CommandHandler("ping", ping))

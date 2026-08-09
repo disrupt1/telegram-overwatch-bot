@@ -1,7 +1,6 @@
-import asyncio
 import logging
 import psutil
-from telegram import Update, InlineKeyboardMarkup, InlineKeyboardButton
+from telegram import InlineQueryResultArticle, InputTextMessageContent, Update, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram.ext import ContextTypes
 
 logger = logging.getLogger(__name__)
@@ -44,3 +43,13 @@ def get_all() -> str:
 async def status(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = get_all()
     await update.message.reply_text(text, reply_markup=inlinebuttons(), parse_mode="Markdown")
+
+async def status_inline(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    result = [
+        InlineQueryResultArticle(
+            id="1",
+            title="Get the status of the computer",
+            input_message_content=InputTextMessageContent(get_all())
+        )
+    ]
+    await update.inline_query.answer(result)

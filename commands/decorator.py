@@ -16,7 +16,7 @@ def authorization(func):
     @wraps(func)
     async def authorization_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if update.effective_user.id not in whitelist:
-            await update.message.reply_text("Absolutely fucking not, you're not authorized to run this command")
+            await update.message.reply_text("you thought you could just access my shit huh?")
             return None
         else:
             return await func(update, context)

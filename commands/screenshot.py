@@ -5,9 +5,11 @@ import logging
 from telegram import Update
 from telegram.ext import ContextTypes
 from PIL import Image
+from commands.decorator import authorization
 
 logger = logging.getLogger(__name__)
 
+@authorization
 async def screenshot(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("Fetching screenshot from system...")
 
@@ -44,7 +46,7 @@ async def watchjob(context: ContextTypes.DEFAULT_TYPE):
         logger.error(e)
         await context.bot.send_message(chat_id=chat_id, text="An error occurred. check logs")
 
-
+@authorization
 async def watch(update: Update, context:ContextTypes.DEFAULT_TYPE):
     if len(context.args) == 0:
         await update.message.reply_text("Please enter the interval (in seconds) of which you want to receive your screenshots at.\ne.g /watch 10")
