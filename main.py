@@ -1,4 +1,3 @@
-from abc import update_abstractmethods
 import logging
 import os
 import ctypes
@@ -33,7 +32,7 @@ requests = HTTPXRequest(
 builder = Application.builder().request(requests).token(token)
 
 if api_base:
-     builder.base_url(api_base)
+    builder.base_url(api_base)
 
 application = builder.build()
 
