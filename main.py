@@ -61,7 +61,7 @@ async def keepawake(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await update.message.reply_text("Keep awake has been turned on. The computer screen will not turn off nor go into sleep.")
         elif context.args[0].lower() == "off":
             ctypes.windll.kernel32.SetThreadExecutionState(thread_hold)
-            await update.message.reply_text("Keep awake has been turned off. Note that if the computer screen turns of or goes into sleep you will no longer be able to monitor your system.")
+            await update.message.reply_text("Keep awake has been turned off. Note that if the computer screen turns off or goes into sleep you will no longer be able to monitor your system.")
         else:
             await update.message.reply_text("Please specifiy with on or off if you want to keep the computer awake.\ne.g /keepawake on OR /keepawake off")
 
