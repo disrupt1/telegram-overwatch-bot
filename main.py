@@ -51,12 +51,7 @@ async def keepawake(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     if len(context.args) == 1:
         if context.args[0].lower() == "on":
-            try:
-                ctypes.windll.kernel32.SetThreadExecutionState(thread_hold | thread_sleep | thread_display)
-                print("turned on keepawake")
-            except Exception as e:
-                print("some shit went wrong")
-                print(e)
+            ctypes.windll.kernel32.SetThreadExecutionState(thread_hold | thread_sleep | thread_display)
             await update.message.reply_text("Keep awake has been turned on. The computer screen will not turn off nor go into sleep.")
         elif context.args[0].lower() == "off":
             ctypes.windll.kernel32.SetThreadExecutionState(thread_hold)
