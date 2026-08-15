@@ -57,6 +57,12 @@ This project started as a way to remotely check on my PC while away from home, b
 ## Example Commands
 
 ```text
+/keepawake on | off
+```
+
+Runs a function that prevents the host computer from sleeping (if the computer screen turns off or goes into sleep mode the bot will no longer be able to monitor the system.)
+
+```text
 /status
 ```
 
@@ -102,7 +108,7 @@ Power off the computer.
 /lock
 ```
 
-Lock the workstation.
+Lock the computer.
 
 ---
 
