@@ -4,7 +4,6 @@ import ctypes
 import subprocess
 from dotenv import load_dotenv
 import ctypes
-from httpx import PoolTimeout
 from telegram import Update
 from telegram.ext import ContextTypes, Application, CommandHandler, CallbackQueryHandler, InlineQueryHandler
 from telegram.request import HTTPXRequest
