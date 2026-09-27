@@ -9,7 +9,7 @@ from telegram.ext import ContextTypes, Application, CommandHandler, CallbackQuer
 from telegram.request import HTTPXRequest
 from commands.ping import ping
 from commands.shellexecution import shell
-from commands.status import status, get_ram, get_disk, get_all, get_cpu, inlinebuttons, status_inline
+from commands.status import status, get_ram, get_disk, get_all, get_cpu, get_gpu, inlinebuttons, status_inline
 from commands.screenshot import screenshot, watch, stopwatch
 from commands.powermanagement import lock, restart, shutdown
 
@@ -61,35 +61,47 @@ async def keepawake(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def callback_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
-    await query.answer()
 
     if query.data == "get_cpu":
         await query.edit_message_text(text=get_cpu(), reply_markup=inlinebuttons())
+        await query.answer()
     elif query.data == "get_ram":
         await query.edit_message_text(text=get_ram(), reply_markup=inlinebuttons())
+        await query.answer()
+    elif query.data == "get_gpu":
+        await query.edit_message_text(get_gpu(), reply_markup=inlinebuttons())
+        await query.answer()
     elif query.data == "get_disk":
         await query.edit_message_text(text=get_disk(), reply_markup=inlinebuttons())
+        await query.answer()
     elif query.data == "get_all":
         await query.edit_message_text(text=get_all(), reply_markup=inlinebuttons())
+        await query.answer()
 
     if query.data == "confirm_shut":
+        await query.answer()
         await query.edit_message_text("The computer will shutdown momentarily...")
         subprocess.run(
             "shutdown /s /f"
         )
     elif query.data == "cancel_shut":
+        await query.answer()
         await query.edit_message_text("Aborted operation.")
     if query.data == "confirm_restart":
+            await query.answer()
             await query.edit_message_text("The computer will reboot momentarily...")
             subprocess.run(
                 "shutdown /r /f"
             )
     elif query.data == "cancel_restart":
+        await query.answer()
         await query.edit_message_text("Aborted operation.")
     if query.data == "confirm_lock":
+            await query.answer()
             await query.edit_message_text("The computer will lock down momentarily...")
             ctypes.windll.user32.LockWorkStation()
     elif query.data == "cancel_lock":
+        await query.answer()
         await query.edit_message_text("Aborted operation.")
 
 def main():
